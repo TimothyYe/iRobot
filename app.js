@@ -9,8 +9,6 @@ var message = require('./routes/message');
 var http = require('http');
 var path = require('path');
 var util = require('util');
-var parseString = require('xml2js').parseString;
-
 var app = express();
 
 // all environments

@@ -1,6 +1,7 @@
 /*
  * POST message page.
  */
+var parseString = require('xml2js').parseString;
 
 exports.index = function(req, res){
 		console.log(req.rawBody.toString());

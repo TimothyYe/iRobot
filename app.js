@@ -4,8 +4,8 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
+var setup = require('./routes/setup');
+var message = require('./routes/message');
 var http = require('http');
 var path = require('path');
 var util = require('util');
@@ -45,25 +45,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', setup.index);
 
-app.post('/', function(req,res){
-  console.log(req.rawBody.toString());
-
-  parseString(req.rawBody, function (err, result) {
-   console.dir(result);
-
-  console.log(result.xml.FromUserName[0]);
-  console.log(result.xml.MsgType[0]);
-  console.log(result["xml"]["Content"][0]);
-
-  if(result["xml"]["Content"][0].indexOf("空气") != -1 ||
-     result["xml"]["Content"][0].indexOf("质量") != -1) {
-  console.log('Yes!');
-}
-
-  });
-
-  res.send('ok');
-});
+app.post('/', message.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -3,20 +3,20 @@
  */
 
 exports.index = function(req, res){
-	var nonce = req.query.nonce;
-	var signature = req.query.signature;
-	var echostr = req.query.echostr;
-	var timestamp = req.query.timestamp;
+		console.log(req.rawBody.toString());
 
-	console.log(req.query.nonce);
-	res.send(req.query.echostr);
+		parseString(req.rawBody, function (err, result) {
+		console.dir(result);
 
+		console.log(result.xml.FromUserName[0]);
+		console.log(result.xml.MsgType[0]);
+		console.log(result["xml"]["Content"][0]);
 
-  var nonce = req.query.nonce;
-  var signature = req.query.signature;
-  var echostr = req.query.echostr;
-  var timestamp = req.query.timestamp;
+		if(result["xml"]["Content"][0].indexOf("空气") != -1 ||
+			result["xml"]["Content"][0].indexOf("质量") != -1) {
+				console.log('Yes!');
+			}
 
-  console.log(req.query.nonce);
-  res.send(req.query.echostr);
-};
+		res.send('ok');
+		});
+	};

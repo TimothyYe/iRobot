@@ -43,15 +43,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', function(req,res){
-  var nonce = req.query.nonce;
-  var signature = req.query.signature;
-  var echostr = req.query.echostr;
-  var timestamp = req.query.timestamp;
-
-  console.log(req.query.nonce);
-  res.send(req.query.echostr);
-});
+app.get('/', setup.index);
 
 app.post('/', function(req,res){
   console.log(req.rawBody.toString());

@@ -2,7 +2,7 @@ var cronJob = require('cron').CronJob;
 var request = require('request');
 var fs = require('fs');
 
-var job = new cronJob('*/30 * * * *', function(){
+var job = new cronJob('*/15 * * * *', function(){
 	request('http://www.pm25.in/api/querys/pm2_5.json?city=chengdu&avg=false&stations=yes&token=9zsQCyiC3cdFR8GzaCsp').pipe(
 		fs.createWriteStream('data.json', { encoding: 'utf-8'}));
 

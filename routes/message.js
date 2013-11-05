@@ -9,7 +9,7 @@ var winston = require('winston');
 var logger = new (winston.Logger)({
     transports: [
       new (winston.transports.Console)(),
-      new (winston.transports.File)({ filename: 'running.log' })
+      new (winston.transports.File)({ filename: '/home/timothy/iRobot/running.log' })
     ]
 });
 

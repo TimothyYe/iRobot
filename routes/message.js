@@ -20,10 +20,10 @@ function readDetailData (callback){
 
 			obj = JSON.parse(data);
 			time = obj[0].time_point;
-			content += 'Latest update:' + time + '\n';
+			content += '数据更新时间:' + time + '\n';
 
 			for(var aq in obj){
-				content += obj[aq].area + '-' + obj[aq].position_name + ' AQ:' + obj[aq].aqi + ' Level:' + obj[aq].quality + ' PM2.5:' + obj[aq].pm2_5;
+				content += obj[aq].area + '-' + obj[aq].position_name + ' 空气指数:' + obj[aq].aqi + ' 空气等级:' + obj[aq].quality + ' PM2.5:' + obj[aq].pm2_5;
 				content += '\n';
 			}
 

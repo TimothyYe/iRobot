@@ -20,6 +20,8 @@ function readDetailData (callback){
 
 			obj = JSON.parse(data);
 			time = obj[0].time_point;
+			time = time.replace("T", " ");
+			time = time.replace("Z", "");
 			content += '数据更新时间: \n' + time + '\n';
 
 			for(var aq in obj){

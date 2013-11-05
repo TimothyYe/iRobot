@@ -3,13 +3,13 @@
  */
 var parseString = require('xml2js').parseString;
 var fs = require('fs');
+var content = '';
 
-function readDetailData (){
+function readDetailData (callback){
 
 	var file = './data.json';
 	var obj;
 	var time;
-	var content;
 
 		fs.readFile(file, 'utf-8', function(err, data){
 			if(err) {
@@ -26,7 +26,7 @@ function readDetailData (){
 				content += '\n';
 			}
 
-			return content;
+			callback(content);
 		});
 }
 
@@ -42,8 +42,9 @@ exports.index = function(req, res){
 
 		if(result["xml"]["Content"][0].indexOf("空气") != -1 ||
 			result["xml"]["Content"][0].indexOf("质量") != -1) {
-				var content = readDetailData();
+				 readDetailData(function(content){
 				console.log(content);
+});
 			}
 
 		res.send('ok');

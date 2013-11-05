@@ -11,6 +11,7 @@
     "xml2js": "*",
     "cron": "*", 
 		"request": "*",
-		"xmlbuilder": "*"
+		"xmlbuilder": "*",
+		"winston": "*"
   }
 }

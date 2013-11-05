@@ -10,6 +10,7 @@ function readDetailData (callback){
 	var file = './data.json';
 	var obj;
 	var time;
+	var content = '';
 
 		fs.readFile(file, 'utf-8', function(err, data){
 			if(err) {

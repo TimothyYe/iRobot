@@ -4,6 +4,14 @@
 var parseString = require('xml2js').parseString;
 var fs = require('fs');
 var builder = require('xmlbuilder');
+var winston = require('winston');
+
+var logger = new (winston.Logger)({
+    transports: [
+      new (winston.transports.Console)(),
+      new (winston.transports.File)({ filename: 'running.log' })
+    ]
+});
 
 function readDetailData (callback){
 
@@ -57,22 +65,17 @@ function createXmlResponse(jsonObj, content, callback){
 }
 
 exports.index = function(req, res){
-	console.log(req.rawBody.toString());
 
 	parseString(req.rawBody, function (err, result) {
-		console.dir(result);
 
-		console.log(result.xml.FromUserName[0]);
-		console.log(result.xml.MsgType[0]);
-		console.log(result["xml"]["Content"][0]);
+		logger.log('Receive content:' + result["xml"]["Content"][0] + ' from user:' + result.xml.FromUserName[0]);
 
 		if(result["xml"]["Content"][0].indexOf("空气") != -1 ||
 			result["xml"]["Content"][0].indexOf("质量") != -1) {
 				readDetailData(function(content){
-					console.log(content);
 
 					createXmlResponse(result, content, function(xmlString){
-						console.log(xmlString);
+						logger.log(xmlString);
 						res.send(xmlString);
 					});
 				});

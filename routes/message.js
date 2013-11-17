@@ -47,7 +47,7 @@ function getVimTips (callback){
 		if(!error && response.statusCode == 200) {
 			result = JSON.parse(body);
 
-			content = '今日Vim技巧: \n' + result.content + '\n' + result.comment;
+			content = '今日Vim技巧: \n' + 'Vim命令:' + result.content + '\n' + '含义:' + result.comment;
 
 			callback(content);
 		}

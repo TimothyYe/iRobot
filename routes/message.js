@@ -51,8 +51,7 @@ function getVimTips (callback){
 
 			callback(content);
 		}
-	}
-
+	});
 }
 
 function createXmlResponse(jsonObj, content, callback){
@@ -96,7 +95,7 @@ exports.index = function(req, res){
 			}
 
 		if(result["xml"]["Content"][0].toUpperCase().indexOf("VIM") != -1)
-
+		{
 				getVimTips(function(content){
 					createXmlResponse(result, content, function(xmlString){
 						logger.log(xmlString);

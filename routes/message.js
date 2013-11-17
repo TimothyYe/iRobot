@@ -5,6 +5,7 @@ var parseString = require('xml2js').parseString;
 var fs = require('fs');
 var builder = require('xmlbuilder');
 var winston = require('winston');
+var request = require('request');
 
 var logger = new (winston.Logger)({
     transports: [
@@ -41,6 +42,19 @@ function readDetailData (callback){
 		});
 }
 
+function getVimTips (callback){
+	request('http://vim-tips.com/random_tips.json', function (error, response, body) {
+		if(!error && response.statusCode == 200) {
+			result = JSON.parse(body);
+
+			content = '今日Vim技巧: \n' + result.content + '\n' + result.comment;
+
+			callback(content);
+		}
+	}
+
+}
+
 function createXmlResponse(jsonObj, content, callback){
 	var doc = builder.create();
 
@@ -74,6 +88,16 @@ exports.index = function(req, res){
 			result["xml"]["Content"][0].indexOf("质量") != -1) {
 				readDetailData(function(content){
 
+					createXmlResponse(result, content, function(xmlString){
+						logger.log(xmlString);
+						res.send(xmlString);
+					});
+				});
+			}
+
+		if(result["xml"]["Content"][0].toUpperCase().indexOf("VIM") != -1)
+
+				getVimTips(function(content){
 					createXmlResponse(result, content, function(xmlString){
 						logger.log(xmlString);
 						res.send(xmlString);

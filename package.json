@@ -12,6 +12,7 @@
     "cron": "*", 
 		"request": "*",
 		"xmlbuilder": "*",
-		"winston": "*"
+		"winston": "*",
+		"request": "*"
   }
 }
